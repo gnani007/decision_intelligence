@@ -10,7 +10,8 @@ import ReactFlow, {
   Controls,
   Background,
   applyEdgeChanges,
-  applyNodeChanges
+  applyNodeChanges,
+  ReactFlowProvider
 } from "reactflow"
 
 import {
@@ -23,9 +24,9 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 
 const FlowCanvas = () => {
-  const nodesList = useSelector((s: any) => s.workflow.nodes);
-  const edgesList = useSelector((s: any) => s.workflow.edges);
-  const highlight = useSelector((s: any) => s.workflow.highlightedEdgeId);
+  const nodesList = useSelector((s: any) => s.flow.nodes);
+  const edgesList = useSelector((s: any) => s.flow.edges);
+  const highlight = useSelector((s: any) => s.flow.highlightedEdgeId);
   const dispatch = useDispatch()
 
   const onNodesChange = useCallback(
@@ -58,26 +59,29 @@ const FlowCanvas = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <ReactFlow
-        nodes={nodesList}
-        edges={edgesList.map((x: any) => ({
-          ...x,
-          style: {
-            stroke: x.id === highlight ? '#0ea5a4' : undefined,
-            strokeWidth: x.id === highlight ? 2 : undefined
-          }
-        }))}
-        onNodesChange={onNodesChange}    // ✅ this updates positions
-        onEdgesChange={onEdgesChange}    // ✅ optional but good practice
-        onConnect={onConnectEdge}
-        fitView
-        nodesDraggable
-        nodesConnectable
-      />
-      <MiniMap />
-      <Controls />
-      <Background />
+    <div className="panel flow-wrapper">
+      <ReactFlowProvider>
+        <ReactFlow
+          nodes={nodesList}
+          edges={edgesList.map((x: any) => ({
+            ...x,
+            style: {
+              stroke: x.id === highlight ? '#0ea5a4' : undefined,
+              strokeWidth: x.id === highlight ? 2 : undefined
+            }
+          }))}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnectEdge}
+          fitView
+          nodesDraggable
+          nodesConnectable
+        >
+          <MiniMap />
+          <Controls />
+          <Background />
+        </ReactFlow>
+      </ReactFlowProvider>
     </div>
   )
 
