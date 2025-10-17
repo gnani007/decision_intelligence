@@ -36,6 +36,8 @@ const FlowCanvas = () => {
     [dispatch, nodesList]
   );
 
+  console.log()
+
   const onEdgesChange = useCallback(
     (changes: any) => {
       dispatch(setEdges(applyEdgeChanges(changes, edgesList)));
@@ -60,6 +62,7 @@ const FlowCanvas = () => {
 
   console.log(nodesList, "test node list")
   console.log(edgesList, "test edgesList")
+  console.log(highlight, "test highlight")
 
   return (
     <div style={{ width: '100%', height: '75vh' }}>

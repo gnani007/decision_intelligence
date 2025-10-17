@@ -3,7 +3,9 @@ export const initialWorkflow = {
     { id: '1', type: 'input', position: { x: 0, y: 40 }, data: { label: 'Start' } },
     { id: '2', type: 'default', position: { x: 260, y: 40 }, data: { label: 'Revenue Check' } },
     { id: '3', type: 'default', position: { x: 560, y: 0 }, data: { label: 'Expansion' } },
-    { id: '4', type: 'default', position: { x: 560, y: 100 }, data: { label: 'Hold' } }
+    { id: '4', type: 'default', position: { x: 560, y: 100 }, data: { label: 'Hold' } },
+    // { id: '5', type: 'default', position: { x: 580, y: 140 }, data: { label: 'Hold_1' } },
+    // { id: '5', type: 'default', position: { x: 600, y: 180 }, data: { label: 'Hold_2' } }
   ],
   edges: [
     { id: 'e1-2', source: '1', target: '2', animated: false, data: { rule: null } },

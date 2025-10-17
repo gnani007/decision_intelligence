@@ -43,9 +43,9 @@ const flowSlice = createSlice({
       if (state.revenue.length > 20) state.revenue.shift();
     },
 
-    evaluatePaths(state) {
+    evaluatePaths(state) { // invoking the initial state
       const edgesBySource = {} as any;
-
+      console.log(edgesBySource)
       state.edges.forEach(e => {
         edgesBySource[e.source] = edgesBySource[e.source] || []; edgesBySource[e.source].push(e);
       });
