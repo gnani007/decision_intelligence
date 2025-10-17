@@ -44,22 +44,25 @@ const FlowCanvas = () => {
   );
 
   const onConnectEdge = useCallback((connect: any) => {
-    const newE = {
+    const newEdge = {
       id: `${connect.source}-${connect.target}-${Date.now()}`,
       source: connect.source,
       target: connect.target,
       animated: false,
       data: { rule: null }
     };
-    dispatch(addEdge(newE));
+    dispatch(addEdge(newEdge));
     setTimeout(() => {
       const r = window.prompt('Define rule (e.g. revenue > 1000000)');
-      if (r !== null) dispatch(updateEdgeRule({ id: newE.id, rule: r.trim() || null }));
+      if (r !== null) dispatch(updateEdgeRule({ id: newEdge.id, rule: r.trim() || null }));
     }, 30);
   }, [dispatch]);
 
+  console.log(nodesList, "test node list")
+  console.log(edgesList, "test edgesList")
+
   return (
-    <div className="panel flow-wrapper">
+    <div style={{ width: '100%', height: '75vh' }}>
       <ReactFlowProvider>
         <ReactFlow
           nodes={nodesList}

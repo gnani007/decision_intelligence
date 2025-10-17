@@ -36,6 +36,38 @@ const flowSlice = createSlice({
       const edges = state.edges.find(x => x.id === id);
       if (edges) edges.data = { ...edges.data, rule };
     },
+
+    pushRevenuePoint(state, a) {
+      state.revenue.push(a.payload);
+      state.latestRevenue = a.payload.value;
+      if (state.revenue.length > 20) state.revenue.shift();
+    },
+
+    evaluatePaths(state) {
+      const edgesBySource = {} as any;
+
+      state.edges.forEach(e => {
+        edgesBySource[e.source] = edgesBySource[e.source] || []; edgesBySource[e.source].push(e);
+      });
+
+      state.highlightedEdgeId = null;
+
+      Object.keys(edgesBySource).forEach(src => {
+        const list = edgesBySource[src];
+        for (const e of list) {
+          if (!e.data || !e.data.rule) continue;
+          const rule = e.data.rule;
+          try {
+            const expr = rule.replace(/revenue/g, state.latestRevenue);
+            if (eval(expr)) {
+              state.highlightedEdgeId = e.id; break;
+            }
+          } catch (err) {
+            console.log(err)
+          }
+        }
+      });
+    }
   },
 });
 
@@ -43,6 +75,8 @@ export const {
   setNodes,
   setEdges,
   addEdge,
-  updateEdgeRule
+  updateEdgeRule,
+  pushRevenuePoint,
+  evaluatePaths
 } = flowSlice.actions;
 export default flowSlice.reducer;

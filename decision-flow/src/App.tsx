@@ -1,11 +1,22 @@
-import './App.css';
+import './App.scss';
+import Charts from './components/Charts';
 import FlowCanvas from './components/FlowCanvas';
 
 function App() {
   return (
     <div className="App">
-      <h3>Decision Workflow dashboard</h3>
-      <FlowCanvas />
+      <div className='header'>
+        <h3>Decision Workflow dashboard</h3>
+      </div>
+      <div className='main-container'>
+        <div className='reactflow-container'>
+          <FlowCanvas />
+        </div>
+        <div className='chart-container '>
+          <Charts />
+        </div>
+      </div>
+
     </div>
   );
 }
