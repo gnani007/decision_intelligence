@@ -5,7 +5,7 @@ This Application architecuture contains react+redux store with typescript.
 With the help fo mock data this application generate revenue dynamically every 1.5 milliseconds.
 To draw the decision making line between nodes, the application take the latest revenue value and check whether it is greater tha 1M if yes it will point to Expansion else it will point to Hold Node.
 
-Bar graph take takking the high and low values of revenue and generate the BAR graph with low and high values.
+Bar graph take taking the high and low values of revenue and generate the BAR graph with low and high values.
 
 Redux store handling the dynamic revenue data and holds the mock initial data to draw the React flow diagram.
 
